@@ -1,0 +1,173 @@
+﻿@model Blog.Models.Article
+<!doctype html>
+<html lang="en">
+<head>
+
+    <title> Редактор статьи </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../Content/fonts/icomoon/style.css" type="text/css" />
+
+    <link rel="stylesheet" href="../../Content/css/owl.theme.default.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/bootstrap/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/owl.theme.default.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="../../Content/css/jquery.fancybox.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/bootstrap-datepicker.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/fonts/flaticon/font/flaticon.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/aos.css" type="text/css" />
+    <link rel="stylesheet" href="../../Content/css/style.css" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <@Page validateRequest="false" %>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+    <div id="overlayer"></div>
+    <div class="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+        <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+
+                    <div class="col-4">
+                        <h1 class="m-0 site-logo"><a href="~/Home/Index" class="text-black">Блог</a></h1>
+                    </div>
+
+                    <div class="col-8">
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li><a href="~/Home/Index" class="nav-link text-black"> Главная </a></li>
+                                <li> <a href="~/Home/Admin" class="nav-link text-black"> Админ </a></li>
+                            </ul>
+                        </nav>
+
+
+                        <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </header>
+
+        <section class="site-section" id="contact-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-5 position-relative">
+                        <h2 class="section-title text-center mb-5"> Написать статью </h2>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-12">
+                        <div class="form">
+
+                            @using (Html.BeginForm("EditArticle", "Home", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(m => m.Id)
+                                <div class="row mb-4">
+                                    <div class="form-group col-12">
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Название" })
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="form-group col-12">
+                                        @Html.TextAreaFor(m => m.Content, new { @class = "form-control", placeholder = "Заголовок" })
+                                    </div>
+                                </div>
+
+                               
+                               
+
+                                <div class="row mb-4">
+                                    <div class="form-group col-12">
+                                        @Html.TextAreaFor(m => m.MainContent, new { @class = "form-control", placeholder = "Содержание статьи...", id="summernote" })
+                                        <script>
+                                            $('#summernote').summernote({
+                                                placeholder: 'Hello Bootstrap 4',
+                                                tabsize: 2,
+                                                height: 100
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="submit" class="btn btn-primary" value="Сохранить" />
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="site-section bg-light footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="icon-heart"
+                                                                                          aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- .site-wrap -->
+    <script src="../../Content/js/jquery-3.3.1.min.js"></script>
+    <script src="../../Content/js/jquery-ui.js"></script>
+    <script src="../../Content/js/popper.min.js"></script>
+    <script src="../../Content/js/bootstrap.min.js"></script>
+    <script src="../../Content/js/owl.carousel.min.js"></script>
+    <script src="../../Content/js/jquery.easing.1.3.js"></script>
+    <script src="../../Content/js/aos.js"></script>
+    <script src="../../Content/js/jquery.fancybox.min.js"></script>
+    <script src="../../Content/js/jquery.sticky.js"></script>
+    <script src="../../Content/js/isotope.pkgd.min.js"></script>
+    <script src="../../Content/js/isotope.pkgd.min.js"></script>
+    <script src="../../Content/js/main.js"></script>
+</body>
+</html>
