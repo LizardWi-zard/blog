@@ -321,7 +321,7 @@ body:after {
         right: 18px;
         height: 2px;
         width: 0;
-        background: #fff;
+        background: #000;
         -webkit-transition: .3s all ease-in-out;
         -o-transition: .3s all ease-in-out;
         transition: .3s all ease-in-out; }
@@ -578,7 +578,7 @@ body:after {
     .sticky-wrapper .site-navbar .site-menu > li > a:hover, .sticky-wrapper .site-navbar .site-menu > li > a.active {
       color: #000 !important; }
   .sticky-wrapper.is-sticky .site-navbar {
-    background: #000;
+    background: #fff;
     border-bottom: 1px solid transparent;
     -webkit-box-shadow: 4px 0 20px -5px rgba(0, 0, 0, 0.1);
     box-shadow: 4px 0 20px -5px rgba(0, 0, 0, 0.1); }
